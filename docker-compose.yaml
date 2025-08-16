@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  soap-service:
+    build:
+      context: ./soapService
+    container_name: soap-service
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  rest-client:
+    build:
+      context: ./restClient
+    container_name: rest-client
+    ports:
+      - "8081:8081"
+    depends_on:
+      - soap-service
+    networks:
+      - app-network
+
+networks:
+  app-network:
