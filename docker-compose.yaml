@@ -20,6 +20,8 @@ services:
       - soap-service
     networks:
       - app-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 
 networks:
   app-network:

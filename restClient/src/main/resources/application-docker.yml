@@ -1,0 +1,5 @@
+server:
+  port: 8081
+soap:
+  client:
+    url: http://soap-service:8080/ws

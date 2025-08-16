@@ -1,0 +1,63 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://akmedvedev.dev/equation/solver" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://akmedvedev.dev/equation/solver" targetNamespace="http://akmedvedev.dev/equation/solver">
+    <wsdl:types>
+        <xs:schema xmlns="http://akmedvedev.dev/equation/solver" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://akmedvedev.dev/equation/solver">
+            <xs:element name="EquationSolverRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="a" type="xs:double"/>
+                        <xs:element name="b" type="xs:double"/>
+                        <xs:element name="c" type="xs:double"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EquationSolverResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="formula" type="xs:string"/>
+                        <xs:element name="D" type="xs:double"/>
+                        <xs:element name="x1" type="xs:double"/>
+                        <xs:element minOccurs="0" name="x2" type="xs:double"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EquationException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="message" type="xs:string"/>
+                        <xs:element name="formula" type="xs:string"/>
+                        <xs:element name="D" type="xs:double"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="EquationSolverResponse">
+        <wsdl:part element="tns:EquationSolverResponse" name="EquationSolverResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="EquationSolverRequest">
+        <wsdl:part element="tns:EquationSolverRequest" name="EquationSolverRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="EquationSolverPort">
+        <wsdl:operation name="EquationSolver">
+            <wsdl:input message="tns:EquationSolverRequest" name="EquationSolverRequest"> </wsdl:input>
+            <wsdl:output message="tns:EquationSolverResponse" name="EquationSolverResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="EquationSolverPortSoap11" type="tns:EquationSolverPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="EquationSolver">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="EquationSolverRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="EquationSolverResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EquationSolverPortService">
+        <wsdl:port binding="tns:EquationSolverPortSoap11" name="EquationSolverPortSoap11">
+            <soap:address location="http://localhost:8080/ws"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
