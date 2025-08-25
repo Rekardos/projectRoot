@@ -23,7 +23,6 @@ public class EquationController {
             @RequestParam double b,
             @RequestParam double c) {
 
-        try {
             EquationSolverResponse response = client.solve(a, b, c);
 
             EquationResponseDto dto = new EquationResponseDto(
@@ -34,10 +33,5 @@ public class EquationController {
             );
 
             return ResponseEntity.ok(dto);
-
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
     }
-
 }
